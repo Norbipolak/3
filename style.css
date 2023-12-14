@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap');
+
+@import "init.css";
+@import "colors.css";
+@import "nav.css";
+@import "style.css";
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+/*
+Mivel az init-ben levettük az összes margin-t és padding-et
+ezért kell adni a h1, h2, és a pragrafusoknak margin-t
+*/
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 0;
+}
+/*
+margin fent-lent 10px és jobb-bal 0px, a címsorok kicsit távolabb lesznek egymástól, aminek a következtében 
+könnyebben lehet majd őket olvasni
+Különböző színeket adunk meg a címsorainknak 
+*/
+p {
+    margin: 10px 0;
+}
+h1 {
+    color: var(--primary);
+}
+h2 {
+    color: var(--primary-lighter);
+}
+h3 {
+    color: var(--secondary);
+}
+h4 {
+    color: var(--dark-mid-grey);
+}
+h5 {
+    color: var(--mid-grey);
+}
+.container {
+    width: 1080px;
+    padding: 15px;
+    text-align: justify;
+    margin: auto; /*ha ezt szeretnénk ha bemenne középre*/
+}
+/*
+a betűtípusok -> google fonts
+van a serif típusú -> amelyiknek van egy kis talpa
+sans serif -> modernebb, nicsenek talpak, hasonlít az írógépes írásra
+classification: display, handwriting, monospace stb.
+
+sans serif-et fogunk használni a szövegtörzsnek és a címsoroknak külön-külön 
+szövegtörzs - open sans regular 400
+rámegyünk, hogy select a jobboldalon 
+két fajta lehetőség van, hogy tudjuk ezt a betűtípust használni a weboldalunkon
+1. linket, amit biztosítottak számunkra, azt bemásoljuk a title alá  
+2. (jobb megoldás) az import -> a style közötti részt kimásoljuk a weboldalról és berakjuk ebbe a style.css-be felülre 
+és a body-ba (felül) azt szeretnék, hogy az legyen a font-family-je, akkor kimásoljuk a google fonts - CSS rules to specify families-ből
+ugyanott van eggyel alatta, ahonnan importáltuk  (ez a szabály amivel érvényesíteni lehet)
+
+Nekünk külön kell a szövegtörzs és a címsorok betűtípusa
+meg lehet csinálni, hogy egy link-vel le tudjuk hozni a két betűtípust (importálni)
+kiválasztjuk a másik (mindkét) betűtípust és annak az importjában már benne lesz mindkettő és 
+ezt csak ide bemásoljuk
+a CSS rules to specify-ban pedig külön ott lesz egymás alatt így:
+font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif;
+a h1, h2, h3...-hoz bemásoljuk az elsőt 
+a body-hoz meg a másodikat és kész, különfajta betűtípusaik lesznek 
+*/
+/*************************************************************************************************************************/
+/*
+Csinálunk még a main-en belül de viszont már a div class="constainer"-en kivül 
+egy div-et ami kap egy class="service-line"-t, abba rakunk egy div class="container" - hogy majd középen legyenek amiket berakunk 
+(container itt a CSS-ben már meg van formálva pl. margin: auto;
+container a div-ben lesz egy másik div class="service -> ide fogjuk írni h3-val hogy melyik ikonról van szó pl.könyvelés
+utána ebbe csinálunk még egy div-et class="service-img és ide rakjuk be a képet img src="kép neve"
+*/
+.service-line {
+    padding: 15px 0;
+    background-color: var(--primary);
+    /*
+    azért, mert beraktuk float: left-be a service-t nem veszi figyelembe a magasságát a service-line-nak és el fogja takarni kicsit 
+    ezért kell ide az overflow: hidden; mert akkor igen
+    hogyha a float-leftnél nem veszi figyelembe a magasságot a tároló, akkor azt modjuk a tárolónak, hogy overflow: hidden
+    */
+    overflow: hidden;
+}
+.service {
+    text-align: center;
+    background-color: white;
+    /*width: 350px; /*azért mert 3 szolgáltatásunk lesz majd és a containernek 1080px; a szélessége*/
+    padding: 15px;
+    float: left; /*hogy bemenjen a 3db service-ünk egymás mellé, width: 350px-nél mellett megy be mind a 3 egymás mellé*/
+    /*azt szeretnénk, hogy ezek a service-k elkülönüljenek egymástól, akkor adunk itt egy margin: 10px 
+    de viszont, így a width ó-ből le kell venni egy kicsit mert megint csak 2 lesz egy sorban és ledobja a 3-kat
+    de van erre egy sokkal jobb megoldás a grid-es
+    */
+    width: 328px;
+    margin: 10px;
+}
+/*
+Túl nagy a képünk és szeretnénk, hogy kisebb(normálisabb méretű) legyen
+azért kell előtte a service img, mert ha csak azt írnánk, hogy img akkor a többi img is megkapná ezeket
+*/
+.service-img img {
+    width: 70%;
+}
+/*
+Összefoglaló mit csináltunk itt ->
+Van nekünk egy container, ami összesen 1080px-es és 3 service-t szeretnénk elhelyezni egymás mellett 
+és mindegyik egy szolgáltatás fog reprezentálni (ami a h3-ban van beleírva) alatta van egy kép, hogy szemléletes legyen
+és ezt úgy oldottuk meg, hogy maga a serice 360px, a text-align: center nem csak a szöveget, hanem a képet is középre hozza
+background-color: white, hogy jobban látható legyen és még van egy padding: 15px
+
+Ha nincsen meghatározva a service-n belüli img-nek a width: 70%, akkora nagyobb lesz -> az img width-je az 70%-a a service img-nek 
+
+Ha lemásoljuk a class="service"-ket, mert 3 kell belölük -> nem fognak bemenni egymás mellé, egymás alatt vannak 
+ezért meghatározunk a class="service"-nek adunk egy float-left 
+******************************************************************************************************************************
+*/
+/*
+Bemásoltuk mégegyszer a div="container" h1, h2, p-os részt
+és utána csináltunk egy footert 
+a footerben csinálunk két div-et, mindegyik class="footer-content" lesz
+az egyik a cégadatokat, a másik pedig az elérhetőségeket fogja tartalmazni, amiket megadunk ul-li-kben
+jelenleg, úgy néz ki, hogy jobb oldalt van, minden egymás alatt 
+*/
+footer {
+    background-color: var(--dark-grey); /*egész footer szürke lett*/
+    color: white;
+    /*
+    itt ugyanazt tudjuk alkalmazni, mint a nav-menünél, hogy display:flex-vel bejön egymás mellé 
+    justify-content: center-vel pedig középen lesz 
+    */
+    display: flex;
+    justify-content: center;
+}
+/*
+azt szeretnénék, hogy a két footer-content kicsit távolabb legyen egymástól
+ezért megadunk nekik egy padding:15px-t
+*/
+.footer-content {
+    padding: 15px;
+}
+footer h3 {
+    text-align: center;
+}
+/****************************************************************************************************************************/
+/*
+csinálunk egy kapcsolat.html-t és átmásoljuk az index.html dolgait, úgy minden marad, csak a main tartalmát kitöröljük 
+*/
+/*
+az index.html-en beírjuk a href kapcsolathoz, hogy kapcsolat.html
+    <nav>
+        <ul>
+            <li class="selected-menu">
+                <a href="#">Kezdőlap</a>
+            </li>
+            <li>
+                <a href="#">Szolgáltatások</a>
+            </li>
+            <li>
+                <a href="kapcsolat.html">Kapcsolat</a>
+            </li>
+        </ul>
+    </nav>
+
+a kapcsolat.html-ben pedig, hogy index.html a kezdőlaphoz és itt a kapcsolat kapja meg a selected-menu-t
+
+  <nav>
+        <ul>
+            <li>
+                <a href="index.html">Kezdőlap</a>
+            </li>
+            <li>
+                <a href="#">Szolgáltatások</a>
+            </li>
+            <li class="selected-menu">
+                <a href="#">Kapcsolat</a>
+            </li>
+        </ul>
+    </nav>
+    
+*/
+
+
+

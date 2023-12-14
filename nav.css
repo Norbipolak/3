@@ -1,0 +1,114 @@
+nav {
+    height: 80px;
+    background-color: var(--primary);
+}
+nav ul {
+    display: flex; /*azért mondtuk neki mert egymás alatt voltak a benne lévő elemek és azt szerettük volna, hogy bekerüljenek egymás alá*/
+    justify-content: center; /*ezzel meg bekerül középre jobb oldalról*/
+    /*
+    ezzel az ul a saját leszármazott elemeit berakja középre
+    most már bent vagyunk horizontálisan középen, most meg kell csinálni, hogy bent legyünk vertikálisan is
+    */
+}
+nav li {
+    list-style-type: none; /*ha le szeretnénk szedni a href-ekről a pöttyöket*/
+    height: 80px;
+    line-height: 80px; 
+    /*
+    ha a nav-on belüli lik-nek is megadjuk, ugyanazt a height-ot, mint a nav-nak 
+    és megadjuk, hogy line-height is ugyanakkora legyen, akkor vertikálisan is középen leszünk 
+    */
+    color: white;
+    /*
+    azt szeretnénk, hogy a linkeknek a text-je fehér legyen és nem alapértelmezett kék, ami nem látszik jól 
+    nem lesz jó, ha itt állítjuk be, nem lesz rá hatással, mert az a-tag az li-n belül van és ezt nem tudja felülírni az li tag
+    viszont a nav a-val meg lehet csinálni
+    */
+}
+nav li:hover {
+    background-color: var(--secondary-darker);
+    /*amelyik li felé visszük a kurzort, annak meg fog változni a színe erre a var(--secondary-darker)-re*/
+    cursor: pointer; /*van olyan beállítása a kurzornak, hogy progress, ilyenkor úgy néz ki, mintha töltene vagy cell*/
+}
+nav a {
+    color: white;
+    text-decoration: none; 
+    /*
+    megszünteti az alapértelmezett alahúzást az a tag-eken
+    text-decoration: az aláhúzás, felülvonás, athúzás
+    */
+    padding: 15px; /*ezzel eltávolodnak egymástól*/
+}
+.selected-menu {
+    background-color: var(--secondary);
+    /*
+    hogy lássuk melyik menü van kijelőlve
+    az első li-nek megadjuk a class="selected-menu" és akkor ez lesz automatikusan kijelölve
+    */
+}
+header {
+    background-image: url("../images/header.jpg");
+    /*
+    Csinálunk egy fejlécet az oldalunknak 
+    és mivel a képek egy másik mappában vannak lementve, ezért abból a mappából ki kell mennünk és utána tudunk bemenni abba a 
+    a mapába, amiben le vannak mentve a képeink
+    de így még nem fog látszani, azért mert nem állítottunk be neki magasságot 
+    */
+    height: 400px;
+    /*
+    magassággal bejött a kép, de nem látunk belöle sokmindent, ennek az az oka, hogy ez egy elég nagy kép 
+    ezért a background-size-val be tudjuk állítani a kép méretét, vár két paramétert, ami akár egy is lehet
+    500*300px-es (y-x tengely, szélesség-magasság) legyen, de ha csak annyit írunk be, hogy 500px, akkor 500*500px-es lesz 
+    */
+    /*background-size: 500px 300px;*/
+    background-size: 100%; 
+    /*ha azt szeretnénk, hogy mindig kitöltse a teret 
+    mindig a 100%-át veszi fel a rendelkezésre álló területnek, a képernyő méretétől függetlenül
+    */
+    /*
+    be lett állítva de ismétlődni fog -> background-repeat: no repeat
+    lehet repeat-x akkor az x tengelyen fog ismétlödni, ugyanez lehet repeat-y is, repeat(alapbeállítás) mindegyiken ismétlődik 
+    */
+    background-repeat: no-repeat;
+    /*
+    Beállítjuk a pozicióját (csináltunk egy border-t, hogy jobban szemléltesse a képnek a helyét(pozicióját) a header-ben
+    */
+    border: 1px solid grey;
+    /*background-position-x: center; /*létezik még itt right és left (alapértelmezett)*/
+    /*background-position-y: center; /*létezik még itt top és bottom*/
+    /*ha azt akaruk, hogy mindkét értelemben középen legyen, akkor simán background-position: center;*/
+    background-position: center;
+    /*
+    ez az optimális beállítás, hogy középen van és kitökti a képernyő 100%-át
+    *****************************************************************************************************************************************
+    */
+}
+   /*
+    következő, hogy van egy logonk amit be szeretnénk rakni a headerbe a kép fölé jobb oldalra
+    készitünk egy div-et id="logo" és ennek a tulajdsonságait fogjuk állítani
+    */
+#logo {
+    position: relative; /*hogy azt tudjuk neki mondani, hogy top: 50%*/
+    background-image: url("../images/evil-corp-logo.jpg");
+    /*
+    még nem látjuk, mert nincsen neki se szélessége se magassága és background-size-ot is be kell állítani 100%-ra
+    */
+    height: 200px;
+    width: 200px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center; /*középre került a saját div-jében*/
+    top: 50%; /*az a baj, hogy a tetejéhez viszonyít és nem teljesen középen lesz a logo, a jobb felső sarka lesz a felénél (50%)*/
+    /*
+    meg szeretnénk csinálni, hogy ne a tetejéhez viszonyítson, hanem a közepéhez 
+    a transfrom: translateY(-50%) azt csinálja nekünk, hogy azt a pontot, amihez képest pl.top-ot figyelembe 
+    veszi a css (felső sarka) ezt 50%-val lejjebb mozgatja -80% feljebb kerül -10% még lejjebb kerül
+    */
+    transform: translateY(-50%); /*translateX-vel is lehet mozgatni az x-tengelyen pl. translate(50%) - jobbra megy a képernyőn*/
+    /*ha megvátoztatjuk a height-ját és a width-jét a logonknak, akkor is középen marad*/
+}
+/*
+létrehozunk egy main tag-et, ami azt jelenti, hogy ez itt a fő tartalom
+ebben létrehozunk egy div-et ami class="container"
+és ezt már a style.ccs-ben fogjuk formázni
+*/
